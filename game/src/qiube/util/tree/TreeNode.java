@@ -1,4 +1,4 @@
-package qiube.util.configuration;
+package qiube.util.tree;
 
 import qiube.exception.TreeException;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -24,6 +24,22 @@ public class TreeNode implements TreeInterface {
      */
     public TreeNode() {
         this.children = new HashMap<String, TreeInterface>();
+    }
+
+    /**
+     * @return
+     */
+    public String toString() {
+        String output = "[";
+        int i = 0;
+        for (String key : this.children.keySet()) {
+            if (0 != i) {
+                output += ", ";
+            }
+            output += (key + ": " + this.children.get(key));
+            i++;
+        }
+        return output + "]";
     }
 
     /**
@@ -99,6 +115,13 @@ public class TreeNode implements TreeInterface {
     @Override
     public Object value() {
         throw new NotImplementedException();
+    }
+
+    /**
+     * @return
+     */
+    public int length() {
+        return this.children.size();
     }
 
 }

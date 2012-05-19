@@ -2,8 +2,6 @@ package qiube;
 
 import qiube.util.Configuration;
 import qiube.util.ServiceContainer;
-import qiube.util.configuration.TreeInterface;
-import qiube.util.configuration.TreeNode;
 
 public class Game {
 

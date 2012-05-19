@@ -1,4 +1,4 @@
-package qiube.util.configuration;
+package qiube.util.tree;
 
 import qiube.exception.TreeException;
 
@@ -13,4 +13,6 @@ public interface TreeInterface {
     public boolean isLeaf();
 
     public Object value();
+
+    public int length();
 }
