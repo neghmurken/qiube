@@ -1,5 +1,6 @@
 package qiube.util.tree;
 
+import qiube.exception.*;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class TreeLeaf implements TreeInterface {
@@ -30,7 +31,7 @@ public class TreeLeaf implements TreeInterface {
      */
     @Override
     public TreeInterface set(String id, Object value) {
-        throw new NotImplementedException();
+        return null;
     }
 
     /**
@@ -41,7 +42,7 @@ public class TreeLeaf implements TreeInterface {
      */
     @Override
     public TreeInterface set(String id, TreeInterface children) {
-        throw new NotImplementedException();
+        return null;
     }
 
     /**
@@ -50,8 +51,8 @@ public class TreeLeaf implements TreeInterface {
      * @return
      */
     @Override
-    public TreeInterface get(String id) {
-        throw new NotImplementedException();
+    public TreeInterface get(String id) throws TreeException {
+        throw new TreeException("This tree is a leaf");
     }
 
     /**

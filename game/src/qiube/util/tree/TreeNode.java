@@ -114,7 +114,7 @@ public class TreeNode implements TreeInterface {
      */
     @Override
     public Object value() {
-        throw new NotImplementedException();
+        return this;
     }
 
     /**

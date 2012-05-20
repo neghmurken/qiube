@@ -160,6 +160,6 @@ public class Configuration {
      */
     public static String bootstrapXML() {
         return "<?xml version=\"1.1\" ?>" +
-            "<tree></tree>";
+            "<configuration></configuration>";
     }
 }
