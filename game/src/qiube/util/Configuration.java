@@ -1,8 +1,6 @@
 package qiube.util;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 import qiube.exception.*;
 
@@ -43,7 +41,9 @@ public class Configuration {
      * @throws ConfigurationException
      */
     public void load() throws ConfigurationException {
-        File configFile = new File(".", this.filename);
+        File configFile = new File(System.getProperty("user.dir"), this.filename);
+
+        System.out.println(configFile.getAbsolutePath());
 
         if (!configFile.exists()) {
             try {
@@ -136,21 +136,19 @@ public class Configuration {
     }
 
     /**
-     *
      * @param raw
      * @return
      */
     public static Object parseValue(String raw) {
         String loweredRaw = raw.toLowerCase();
 
-        if(loweredRaw.equals("true") || loweredRaw.equals("on"))
+        if (loweredRaw.equals("true") || loweredRaw.equals("on")) {
             return true;
-
-        else if(loweredRaw.equals("false") || loweredRaw.equals("off"))
+        } else if (loweredRaw.equals("false") || loweredRaw.equals("off")) {
             return false;
-
-        else if(loweredRaw.equals("null") || loweredRaw.isEmpty())
+        } else if (loweredRaw.equals("null") || loweredRaw.isEmpty()) {
             return null;
+        }
 
         return raw;
     }
@@ -161,5 +159,47 @@ public class Configuration {
     public static String bootstrapXML() {
         return "<?xml version=\"1.1\" ?>" +
             "<configuration></configuration>";
+    }
+
+    /**
+     *
+     * @param path
+     * @return
+     */
+    public Object get(String path) {
+        return this.get(path, null);
+    }
+
+    /**
+     *
+     * @param path
+     * @param defaultValue
+     * @return
+     */
+    public Object get(String path, Object defaultValue) {
+        return this.get(path, defaultValue, false);
+    }
+
+    /**
+     *
+     * @param path
+     * @param defaultValue
+     * @param setDefault
+     * @return
+     */
+    public Object get(String path, Object defaultValue, boolean setDefault) {
+        try {
+            TreeInterface match = this.tree.get(path);
+            if (null == match) {
+                if (setDefault) {
+                    // TODO: add set default value
+                }
+                return defaultValue;
+            } else {
+                return match.value();
+            }
+        } catch (TreeException exception) {
+            return defaultValue;
+        }
     }
 }
